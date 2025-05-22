@@ -17,7 +17,7 @@ def home():
 # Cargar la base de datos en un DataFrame
 
 ### AQUI VA EL MODELO
-model = pd.read_pickle('models\\model.pkl')
+model = pd.read_pickle('./models/model.pkl')
 ###
 
 
