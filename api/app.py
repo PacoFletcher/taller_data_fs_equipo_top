@@ -27,8 +27,11 @@ def predict():
     restrooms = int(data['restrooms'])
 
     input_data = [[surface, bedrooms, restrooms]]
-    prediction = model.predict(input_data)
-
+    
+    ### PREDICCION
+    #prediction = model.predict(input_data)
+    ###
+    
     return 1000
     ### Versión definitiva
     # return jsonify({'prediction': float(prediction[0])})
