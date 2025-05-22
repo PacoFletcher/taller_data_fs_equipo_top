@@ -39,19 +39,20 @@ function App() {
   };
 
   return (
+
     <div className="App">
       <h1 className="title">Housing Price Prediction</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="surface">Surface:</label>
-        <input type="text" id="surface" name="surface" value={inputs.surface} onChange={handleChange} />
+        <label className="label" htmlFor="surface">Surface:</label>
+        <input className="input" type="text" id="surface" name="surface" placeholder="Introduce a number of desired surface" value={inputs.surface} onChange={handleChange} />
 
-        <label htmlFor="bedrooms">Bedrooms:</label>
-        <input type="text" id="bedrooms" name="bedrooms" value={inputs.bedrooms} onChange={handleChange} />
+        <label className="label" htmlFor="bedrooms">Bedrooms:</label>
+        <input className="input" type="text" id="bedrooms" name="bedrooms" placeholder="Introduce a number of desired bedrooms" value={inputs.bedrooms} onChange={handleChange} />
 
-        <label htmlFor="restrooms">Restrooms:</label>
-        <input type="text" id="restrooms" name="restrooms" value={inputs.restrooms} onChange={handleChange} />
+        <label className="label" htmlFor="restrooms">Restrooms:</label>
+        <input className="input" type="text" id="restrooms" name="restrooms" placeholder='Introduce a number of desired restrooms' value={inputs.restrooms} onChange={handleChange} />
 
-        <button type="submit">Predict</button>
+        <button className="button" type="submit">Predict</button>
       </form>
 
       {prediction && (
