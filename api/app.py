@@ -12,7 +12,12 @@ def home():
 
 
 # Cargar la base de datos en un DataFrame
-model = pd.read_pickle('models/model.pkl')
+
+### AQUI VA EL MODELO
+#model = pd.read_pickle('models/model.pkl')
+###
+
+
 @app.route('/predict', methods=['POST'])
 def predict():
     data = request.get_json()
