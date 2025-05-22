@@ -8,7 +8,7 @@ cors = CORS(app)
 
 @app.route('/')
 def home():
-    return jsonify({'message': 'Welcome to the housing API!'})
+    return jsonify({'message': 'Proyecto del equipo TOP'})
 
 
 # Cargar la base de datos en un DataFrame
@@ -18,24 +18,30 @@ def home():
 ###
 
 
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['GET'])
 def predict():
-    data = request.get_json()
+    
+    # data = request.get_json()
 
-    surface = int(data['surface'])
-    bedrooms = int(data['bedrooms'])
-    restrooms = int(data['restrooms'])
+    # surface = int(data['surface'])
+    # bedrooms = int(data['bedrooms'])
+    # restrooms = int(data['restrooms'])
 
-    input_data = [[surface, bedrooms, restrooms]]
+
+    surface = request.args.get('surface', -1)
+    bedrooms = request.args.get('bedrooms', -1)
+    restrooms = request.args.get('restrooms', -1)
+
+    input_data = [[float(surface), int(bedrooms), int(restrooms)]]
     
     ### PREDICCION
     #prediction = model.predict(input_data)
     ###
-    
-    return 1000
+
+    # return 1000
     ### Versión definitiva
-    # return jsonify({'prediction': float(prediction[0])})
+    return jsonify({'prediction': input_data[0][0]})
     ###
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0")
+    app.run(debug=True, host="0.0.0.0",port=5000)
