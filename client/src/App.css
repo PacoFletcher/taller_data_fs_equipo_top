@@ -40,3 +40,31 @@
 .read-the-docs {
   color: #888;
 }
+
+.background {
+    background: linear-gradient(-45deg, #f08d6f, #fa82b0, #72d0f1, #63f1d0);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite, glitter 2s infinite;
+    position: relative;
+}
+
+.title {
+    font-size: 4em;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    75% {
+        background-position: 50% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}

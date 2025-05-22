@@ -1,35 +1,64 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import './App.css';
 
+const URL_BASE = 'http://localhost:5001/predict';
 function App() {
-  const [count, setCount] = useState(0)
+  const [inputs, setInputs] = useState({
+    surface: '',
+    bedrooms: '',
+    restrooms: ''
+  });
+
+  const [prediction, setPrediction] = useState(null);
+
+  const handleChange = (e) => {
+    setInputs({
+      ...inputs,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const query = new URLSearchParams({
+      surface: inputs.surface,
+      bedrooms: inputs.bedrooms,
+      restrooms: inputs.restrooms
+    }).toString();
+    const response = await fetch(`${URL_BASE}?${query}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }, 
+    });
+
+    const data = await response.json();
+
+    setPrediction(data.prediction);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <h1 className="title">Housing Price Prediction</h1>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="surface">Surface:</label>
+        <input type="text" id="surface" name="surface" value={inputs.surface} onChange={handleChange} />
+
+        <label htmlFor="bedrooms">Bedrooms:</label>
+        <input type="text" id="bedrooms" name="bedrooms" value={inputs.bedrooms} onChange={handleChange} />
+
+        <label htmlFor="restrooms">Restrooms:</label>
+        <input type="text" id="restrooms" name="restrooms" value={inputs.restrooms} onChange={handleChange} />
+
+        <button type="submit">Predict</button>
+      </form>
+
+      {prediction && (
+        <p>Predicted Price: {prediction}</p>
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
